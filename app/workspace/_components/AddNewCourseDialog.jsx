@@ -38,12 +38,14 @@ const router = useRouter();
     })
 
     const onHandleInputChange = (field, value) => {
-        setFormData((prev) => ({
-            ...prev,
-            [field]: value
-        }))
-        console.log(formData)
-    }
+        setFormData((prev) => {
+            const updated = { ...prev, [field]: value };
+            console.log(updated);
+            return updated;
+        });
+    };
+
+
 
     const onGenerate = async () => {
         console.log(formData)
@@ -86,8 +88,15 @@ const router = useRouter();
                 </div>
                 <div className='flex gap-3 items-center mt-2'>
                     <label>Include Video</label>
-                    <Switch onCheckedChange={()=>onHandleInputChange('includeVideo', !formData.includeVideo)}/>
+                        <Switch
+                            checked={formData.includeVideo}
+                            onCheckedChange={(checked) =>
+                                onHandleInputChange('includeVideo', checked)
+                            }
+                        />
+
                 </div>
+
                 <div className='mt-2'>
                     <label>Difficulty Level</label>
                     <Select onValueChange={(value) => onHandleInputChange('level', value)}>

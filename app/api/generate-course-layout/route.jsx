@@ -3,6 +3,7 @@ import { coursesTable } from '@/config/schema';
 import { currentUser } from '@clerk/nextjs/server';
 import { GoogleGenAI } from '@google/genai';
 import { NextResponse } from 'next/server';
+import axios from 'axios';
 
 const PROMPT = `Generate a learning course based on the following details. Make sure to add Course Name, Description, Course Banner Image Prompt (Create a modern, flat-style 2D digital illustration representing the user's topic. Include UI/UX elements such as mockup screens, text blocks, icons, buttons, and creative workspace tools. Add symbolic elements related to the user's course, like sticky notes, design components, and visual aids. Use a minimalist color palette (black, gray, white, slate) with a clean, professional look. The illustration should feel creative, tech-savvy, and educational, ideal for visualizing concepts in the user's course) for Course Banner in 3d format Chapter Name, Topic under each chapters , Duration for each chapters etc, in JSON format only
 
@@ -74,14 +75,38 @@ export async function POST(req){
 
     const JSONResp = JSON.parse(RawJson);
 
+    const ImagePrompt = JSONResp.course?.bannerImagePrompt;
+
     //generate image
+    const bannerImageUrl = await GenerateImage(ImagePrompt)
 
     const result = await db.insert(coursesTable).values({
         ...formData,
         courseJson: response.candidates[0].content.parts[0].text,
         userEmail: user?.primaryEmailAddress?.emailAddress,
-        cid: courseId
+        cid: courseId,
+        bannerImageUrl: bannerImageUrl
     })
 
     return NextResponse.json({courseId:courseId});
+    }
+
+    const GenerateImage = async (imagePrompt) => {
+      const BASE_URL='https://aigurulab.tech';
+        const result = await axios.post(BASE_URL+'/api/generate-image',
+                {
+                    width: 1024,
+                    height: 1024,
+                    input: imagePrompt,
+                    model: 'flux',
+                    aspectRatio:"16:9"
+                },
+                {
+                    headers: {
+                        'x-api-key': process.env.AI_GURU_LAB_API,
+                        'Content-Type': 'application/json',
+                    },
+                })
+        console.log(result.data.image)
+        return result.data.image;
     }

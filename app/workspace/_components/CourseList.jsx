@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import React, { useState } from 'react'
+import AddNewCourseDialog from './AddNewCourseDialog';
 
 export default function CourseList() {
     const [CourseList, setCourseList] = useState([]);
@@ -13,7 +14,9 @@ export default function CourseList() {
             CourseList.length == 0 ?    <div className='flex flex-col p-7 items-center justify-content border rounded-xl mt-2 bg-secondary'>
                                             <Image className='grayscale' src="/online-education.png" alt="edu" width={80} height={80} />
                                             <h2 className='my-2 text-xl font-bold'>Looks like you haven't created any courses yet</h2>
-                                            <Button>Create your first course</Button>
+                                            <AddNewCourseDialog>
+                                                <Button>Create your first course</Button>
+                                            </AddNewCourseDialog>
                                         </div> :
                                         <div>
                                             List of Courses

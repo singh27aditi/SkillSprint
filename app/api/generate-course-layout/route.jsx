@@ -34,6 +34,10 @@ Schema:
 
 , User Input: `
 
+export const ai = new GoogleGenAI({
+        apiKey: process.env.GEMINI_API_KEY
+    });
+
 export async function POST(req){
     const {courseId, ...formData} = await req.json();
     const user = await currentUser();
@@ -41,11 +45,6 @@ export async function POST(req){
 // To run this code you need to install the following dependencies:
 // npm install @google/genai mime
 // npm install -D @types/node
-
-
-    const ai = new GoogleGenAI({
-        apiKey: process.env.GEMINI_API_KEY
-    });
     const config = {
         responseMimeType: 'text/plain',
     };

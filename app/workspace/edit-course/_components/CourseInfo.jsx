@@ -2,10 +2,13 @@ import { Button } from '@/components/ui/button';
 import axios from 'axios';
 import { Book, Clock, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function CourseInfo({ course }) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   if (!course || !course.courseJson) return <div>Loading...</div>;
 
@@ -36,10 +39,13 @@ export default function CourseInfo({ course }) {
         courseId: course?.cid,
       });
       console.log(result.data);
+      setLoading(false);
+      router.replace('/workspace');
+      toast.success('Course generated successfully!');
     } catch (err) {
       console.error('Error generating course content:', err);
-    } finally {
       setLoading(false);
+      toast.error("Server Side Error");
     }
   };
 

@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SkillSprint
 
-## Getting Started
+Accelerate your growth. Master new skills, faster.
 
-First, run the development server:
+SkillSprint is a modern, AI-powered online learning platform designed to help you discover, enroll, and master new skills efficiently. With a clean, minimal interface and a focus on hands-on learning, SkillSprint empowers learners to achieve their goals at their own pace.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Features
+
+- **Personalized Learning:** AI-generated course content tailored to your goals and pace.
+- **Progress Tracking:** Mark chapters as completed and track your learning journey.
+- **Modern UI:** Clean, responsive, and accessible design with dark mode support.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js (App Router), React, Tailwind CSS
+- **Backend:** Next.js API Routes, Drizzle ORM
+- **Database:** (Configured via Drizzle, see `/config/db.jsx`)
+- **Authentication:** Clerk
+- **UI Components:** Custom + Lucide React Icons
+
+---
+
+## 📦 Folder Structure
+
+```
+learning-app/
+  online-learning-platform/
+    app/                # Main Next.js app (pages, API routes, components)
+    components/         # Shared UI components
+    config/             # Database and schema config
+    context/            # React context providers
+    hooks/              # Custom React hooks
+    lib/                # Utility functions
+    public/             # Static assets (images, icons)
+    README.md           # This file
+    package.json        # Project dependencies
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ⚡ Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Clone the repository
+```bash
+git clone <repo-url>
+cd learning-app/online-learning-platform
+```
 
-## Learn More
+### 2. Install dependencies
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Configure Environment
+- Set up your database and Clerk authentication as needed.
+- Update any environment variables in `.env` (if required).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Run the development server
+```bash
+npm run dev
+```
+Visit [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📚 Usage
+- **Browse Courses:** Explore available courses on the landing page.
+- **Sign Up / Sign In:** Create an account to enroll in courses.
+- **Enroll & Learn:** Enroll in a course, track your progress, and complete hands-on projects.
+- **Edit or Create Courses:** (If you are an admin/instructor)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+Contributions are welcome! To contribute:
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+> Made with ❤️ by the SkillSprint team

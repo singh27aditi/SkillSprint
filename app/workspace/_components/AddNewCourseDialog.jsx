@@ -59,7 +59,7 @@ const router = useRouter();
             });
             console.log(result.data);
             if(result.data.resp == 'limit exceeded'){
-                router.push('/worlspace/billing');
+                router.push('/workspace/billing');
                 toast.warning('Please subscribe to a plan.')
             }
             setLoading(false);

@@ -29,7 +29,7 @@ export default function EnrollCourseCard({ course, enrollCourse }) {
         <div className=''>
             <h2 className="flex justify-between text-sm text-primary">Progress <span>{calculatePerProgress()}%</span></h2>
             <Progress value={calculatePerProgress()} />
-            <Link href={'/workspace/course/' + course?.cid}>
+            <Link href={'/workspace/view-course/' + course?.cid}>
                 <Button className='w-full mt-3'>
                     <PlayCircle className="mr-2 h-4 w-4" />
                     Continue Learning

@@ -9,14 +9,14 @@ export default function EnrollCourseList() {
         GetEnrolledCourse();
     }, []);
     const GetEnrolledCourse = async () => {
-    try {
-        const result = await axios.get('/api/enroll-course');
-        console.log(result.data);
-        setEnrolledCourseList(result.data);
-    } catch (err) {
-        console.error('Failed to fetch enrolled courses:', err);
+        try {
+            const result = await axios.get('/api/enroll-course');
+            console.log(result.data);
+            setEnrolledCourseList(result.data);
+        } catch (err) {
+            console.error('Failed to fetch enrolled courses:', err);
+        }
     }
-}
 
   return enrolledCourseList?.length > 0 && (
     <div className='mt-3'>

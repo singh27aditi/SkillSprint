@@ -21,7 +21,7 @@ import AddNewCourseDialog from './AddNewCourseDialog'
 
 const SidebarOptions = [
   { title: 'Dashboard', icon: LayoutDashboard, path: '/workspace' },
-  { title: 'My Learning', icon: Book, path: '/workspace/my-courses' },
+  { title: 'My Learning', icon: Book, path: '/workspace/my-learning' },
   { title: 'Explore Courses', icon: Compass, path: '/workspace/explore' },
   { title: 'Billing', icon: CreditCardIcon, path: '/workspace/billing' },
   { title: 'Profile', icon: UserCircle2Icon, path: '/workspace/profile' }

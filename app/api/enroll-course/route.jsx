@@ -37,3 +37,28 @@ export async function GET(req) {
         return NextResponse.json(result);
     }
 }
+
+export async function PUT(req) {
+  const { completedChapter, courseId } = await req.json();
+  const user = await currentUser();
+
+  try {
+    const result = await db
+      .update(enrollCourseTable)
+      .set({
+        completedChapters: completedChapter
+      })
+      .where(
+        and(
+          eq(enrollCourseTable.cid, courseId),
+          eq(enrollCourseTable.userEmail, user?.primaryEmailAddress?.emailAddress)
+        )
+      )
+      .returning(enrollCourseTable);
+
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error("Failed to update completed chapters:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}

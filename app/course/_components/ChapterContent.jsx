@@ -1,22 +1,71 @@
+import { Button } from '@/components/ui/button';
+import { enrollCourseTable } from '@/config/schema';
 import { SelectedChapterIndexContext } from '@/context/SelectedChapterIndexContext';
-import React, { useContext } from 'react';
+import axios from 'axios';
+import { CheckCircle, Cross, Loader2Icon, X } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import React, { useContext, useState } from 'react';
 import YouTube from 'react-youtube';
+import { toast } from 'sonner';
 
-export default function ChapterContent({ courseInfo }) {
-  const courseContent = courseInfo?.courses?.courseContent;
-  const { selectedChapterIndex } = useContext(SelectedChapterIndexContext);
+export default function ChapterContent({ courseInfo, refreshData }) {
+    const enrollCourse = courseInfo?.enrollCourse;
+    const { courseId } = useParams();
+    const courseContent = courseInfo?.courses?.courseContent;
+    const { selectedChapterIndex } = useContext(SelectedChapterIndexContext);
 
-  if (!courseContent?.[selectedChapterIndex]) return <p>Loading chapter...</p>;
+    if (!courseContent?.[selectedChapterIndex]) return <p>Loading chapter...</p>;
 
-  const chapter = courseContent[selectedChapterIndex];
-  const videoData = chapter?.youtubeVideo;
-  const topics = chapter?.courseData;
+    const chapter = courseContent[selectedChapterIndex];
+    const videoData = chapter?.youtubeVideo;
+    const topics = chapter?.courseData;
+    let completedChapter = enrollCourse?.completedChapters??[];
+    const [loading, setLoading] = useState(false);
+
+    const markChapterCompleted = async () => {
+        completedChapter.push(selectedChapterIndex);
+        setLoading(true);
+
+        const result = await axios.put('/api/enroll-course', {
+            courseId: courseId,
+            completedChapter: completedChapter
+        });
+        console.log(result);
+        refreshData();
+        setLoading(false);
+        toast.success('Chapter marked as completed.')
+    }
+
+    const markInCompleteChapter = async () => {
+        setLoading(true);
+        const completedChap = completedChapter.filter(item => item != selectedChapterIndex)
+        const result = await axios.put('/api/enroll-course', {
+            courseId: courseId,
+            completedChapter: completedChap
+        });
+        console.log(result);
+        refreshData();
+        setLoading(false);
+        toast.success('Chapter marked as incomplete.')
+    }
 
   return (
     <div className="w-full px-4 md:px-10 py-6">
-      <h2 className="font-bold text-2xl mb-2">
-        {selectedChapterIndex + 1}. {chapter?.courseData?.[0]?.chapterName}
-      </h2>
+
+        <div className='flex justify-between items-center'>
+            <h2 className="font-bold text-2xl mb-2">{selectedChapterIndex + 1}. {chapter?.courseData?.[0]?.chapterName}</h2>
+            {!completedChapter?.includes(selectedChapterIndex) ? (
+                <Button disabled={loading} onClick={markChapterCompleted}>
+                    {loading ? <Loader2Icon className="animate-spin" /> : <CheckCircle />}
+                    Mark as Completed
+                </Button>
+                ) : (
+                <Button variant="outline" disabled={loading} onClick={markInCompleteChapter}>
+                    {loading ? <Loader2Icon className="animate-spin" /> : <X />}
+                    Marked Incomplete
+                </Button>
+            )}
+        </div>
 
       <h3 className="my-4 font-semibold text-lg text-gray-700">Related Videos 🎬</h3>
 

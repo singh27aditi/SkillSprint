@@ -26,7 +26,7 @@ export default function Course() {
       <AppHeader hideSideBar={true}/>
       <div className='flex gap-10'>
         <ChapterListSideBar courseInfo={courseInfo}/>
-        <ChapterContent courseInfo={courseInfo}/>
+        <ChapterContent courseInfo={courseInfo} refreshData={() => GetEnrolledCourseById()}/>
       </div>
     </div>
   )

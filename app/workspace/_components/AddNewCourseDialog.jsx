@@ -22,6 +22,7 @@ import { Button } from '@/components/ui/button'
 import { Loader2Icon, Sparkle } from 'lucide-react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function AddNewCourseDialog({ children }) {
 const [loading, setLoading] = useState(false);
@@ -57,6 +58,10 @@ const router = useRouter();
                 courseId:courseId
             });
             console.log(result.data);
+            if(result.data.resp == 'limit exceeded'){
+                router.push('/worlspace/billing');
+                toast.warning('Please subscribe to a plan.')
+            }
             setLoading(false);
             router.push('/workspace/edit-course/'+result.data?.courseId);
         }

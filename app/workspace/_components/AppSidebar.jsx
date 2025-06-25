@@ -15,7 +15,7 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Book, Compass, LayoutDashboard, PencilRulerIcon, UserCircle2Icon, WalletCards } from 'lucide-react'
+import { Book, Compass, CreditCardIcon, LayoutDashboard, UserCircle2Icon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import AddNewCourseDialog from './AddNewCourseDialog'
 
@@ -23,7 +23,7 @@ const SidebarOptions = [
   { title: 'Dashboard', icon: LayoutDashboard, path: '/workspace' },
   { title: 'My Learning', icon: Book, path: '/workspace/my-courses' },
   { title: 'Explore Courses', icon: Compass, path: '/workspace/explore' },
-  { title: 'AI Tools', icon: PencilRulerIcon, path: '/workspace/ai-tools' },
+  { title: 'Billing', icon: CreditCardIcon, path: '/workspace/billing' },
   { title: 'Profile', icon: UserCircle2Icon, path: '/workspace/profile' }
 ]
 

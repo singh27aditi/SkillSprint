@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from 'next/link';
 import { useState } from 'react';
+import { SignUp } from "@clerk/clerk-react";
 
 const dummyCourses = [
   {
@@ -96,7 +97,7 @@ export default function LandingPage() {
         <div className="text-5xl mb-4">🎓</div>
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Empower Your Learning Journey</h1>
         <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">Discover, enroll, and master new skills with our streamlined, AI-powered online courses.</p>
-        <Link href="/auth/sign-up">
+        <Link href="/sign-up">
           <Button size="lg" className="px-8 py-4 text-lg font-semibold shadow">Get Started</Button>
         </Link>
       </section>
